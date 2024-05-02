@@ -1,4 +1,4 @@
-#!/usr/bin/pup
+#!/usr/bin/pupppet
 # Puppet Manifest to  install flask from pip3.
 
 package { 'flask':
