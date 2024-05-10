@@ -1,29 +1,14 @@
 #!/usr/bin/env bash
-# 404 Not Found Page
-
-apt-get update
-apt-get install -y nginx
-
-touch /var/www/html/index.html /var/www/html/404.html
+# Configure Nginx so that its HTTP response contains a custom header (on web-01 and web-02)
+sudo apt-get update
+sudo apt-get -y install nginx
+touch /var/www/html/index.html
 echo "Hello World!" > /var/www/html/index.html
+touch /var/www/html/404.html
 echo "Ceci n'est pas une page" > /var/www/html/404.html
+sudo sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+# Test the Nginx configuration
+sudo nginx -t
 
-printf %s "server {
-    listen 80;
-    listen [::]:80 default_server;
-    add_header X-Served-By $HOSTNAME;
-    root   /var/www/html/;
-    index  index.html index.htm;
-
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=TfgBHC5gvTI;
-    }
-
-    error_page 404 /404.html;
-    location /404 {
-        root /var/www/html/;
-        internal;
-    }
-}" > /etc/nginx/sites-available/default
-
-service nginx restart
+# Restart Nginx
+sudo service nginx restart
