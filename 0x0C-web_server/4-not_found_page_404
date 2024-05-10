@@ -4,15 +4,19 @@
 sudo apt-get -y update
 sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
+
+# Create custom 404 page
 echo 'Ceci n'"'"'est pas une page' | sudo tee /usr/share/nginx/html/404.html
 
-echo "Holberton School" | sudo tee /var/www/html/index
+# Create index page
+echo "Holberton School" | sudo tee /var/www/html/index.html
+
+# Add redirection rule
 sudo sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
 
-sudo sed -i "error_page 404 /404.html;\n\t
-    location = /404.html {
-		root /usr/share/nginx/html;\n\t
-        internal;\n\t
-    }" /usr/share/nginx/html
+# Configure Nginx to serve custom 404 page
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup  # Create a backup of the default config
+sudo sed -i '/error_page 404/c error_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}' /etc/nginx/sites-available/default
 
+# Restart Nginx
 sudo service nginx restart
