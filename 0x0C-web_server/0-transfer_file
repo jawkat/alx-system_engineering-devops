@@ -9,4 +9,4 @@ file="$1"
 ip="$2"
 username="$3"
 path_to_ssh="$4"
-scp -o StrictHostKeyChecking=no -i "$path_to_ssh" "$file" "$username@$ip":~
+sudo scp -o StrictHostKeyChecking=no -i "$path_to_ssh" "$file" "$username@$ip":~

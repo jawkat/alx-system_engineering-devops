@@ -35,7 +35,15 @@ sudo sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtu
 
 # Configure Nginx to serve custom 404 page
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup  # Create a backup of the default config
-sudo sed -i '/error_page 404/c error_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}' /etc/nginx/sites-available/default
+#sudo sed -i '/error_page 404/c error_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}' /etc/nginx/sites-available/default
+
+# Append custom 404 page configuration to Nginx configuration
+echo "error_page 404 /404.html;" | sudo tee -a /etc/nginx/sites-available/default
+echo -e "\tlocation = /404.html {" | sudo tee -a /etc/nginx/sites-available/default
+echo -e "\t\troot /usr/share/nginx/html;" | sudo tee -a /etc/nginx/sites-available/default
+echo -e "\t\tinternal;" | sudo tee -a /etc/nginx/sites-available/default
+echo -e "\t}" | sudo tee -a /etc/nginx/sites-available/default
+
 
 # Restart Nginx
 sudo service nginx restart
