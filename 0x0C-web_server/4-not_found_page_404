@@ -4,9 +4,28 @@
 sudo apt-get -y update
 sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
+echo 'Ceci n'"'"'est pas une page' | sudo tee /usr/share/nginx/html/404.html
+
+
+sudo sed -i "error_page 404 /404.html;\n\t
+    location = /404.html {
+		root /usr/share/nginx/html;\n\t
+        internal;\n\t
+    }" /usr/share/nginx/html
+
+sudo service nginx restart
+
+
+#!/usr/bin/env bash
+# Configure your Nginx server for 404
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
 
 # Create custom 404 page
-echo 'Ceci n'"'"'est pas une page' | sudo tee /usr/share/nginx/html/404.html
+#echo 'Ceci n'"'"'est pas une page' | sudo tee /usr/share/nginx/html/404.html
+echo "Ceci n'est pas une page" > /var/www/html/404.html
 
 # Create index page
 echo "Holberton School" | sudo tee /var/www/html/index.html
