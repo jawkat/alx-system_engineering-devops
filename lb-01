@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+ssh ubuntu@54.237.40.121exit
+
