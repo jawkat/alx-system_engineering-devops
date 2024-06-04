@@ -37,8 +37,6 @@ def get_employee(employee_id):
 
     nb_task_done = len(task_done)
 
-    print(nb_task_done,"/", total_task)
-
     print(f"Employee {employee_name} is done with tasks({nb_task_done}/{total_task}):")
     for task in task_done:
         print(f"\t {task.get('title')}")
