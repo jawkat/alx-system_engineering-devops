@@ -37,12 +37,14 @@ def get_employee(employee_id):
 
     nb_task_done = len(task_done)
 
-    print(f"Employee {employee_name} is done with tasks({nb_task_done}/{total_task}):")
+    print(f"Employee {employee_name} is done withtasks\
+        ({nb_task_done}/{total_task}):")
     for task in task_done:
         print(f"\t {task.get('title')}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python3 0-gather_data_from_an_API.py <employee_id>")
     else:
-    	get_employee(sys.argv[1])
+        get_employee(sys.argv[1])
