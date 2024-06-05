@@ -1,0 +1,11 @@
+0x18-webstack_monitoring
+
+  Your Datadog Agent is running and functioning properly.
+  It will continue to run in the background and submit metrics to Datadog.
+  If you ever want to stop the Datadog Agent, run:
+
+      sudo systemctl stop datadog-agent
+
+  And to run it again run:
+
+      sudo systemctl start datadog-agent
