@@ -4,7 +4,7 @@
   It will continue to run in the background and submit metrics to Datadog.
   If you ever want to stop the Datadog Agent, run:
 
-      sudo systemctl stop datadog-agent
+      0
 
   And to run it again run:
 
